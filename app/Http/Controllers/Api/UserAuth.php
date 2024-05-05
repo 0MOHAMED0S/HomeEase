@@ -55,32 +55,46 @@ class UserAuth extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'email' => 'nullable|email|max:100',
-                'phone' => 'required|string|max:12',
+                'phone' => 'nullable|string|max:12',
                 'password' => 'required|string|min:6',
             ]);
             if ($validator->fails()) {
                 $errors = $validator->errors()->toArray();
                 return response()->json([
                     'status' => 401,
-                    'message' => 'validation error',
+                    'message' => 'Validation error',
                     'errors' => $errors
                 ], 401);
             }
 
-            if (!Auth::attempt($request->only('phone', 'password'))) {
-                $errors = $validator->errors()->toArray();
+            if ($request->has('email')) {
+                if (!Auth::attempt($request->only('email', 'password'))) {
+                    return response()->json([
+                        'status' => 401,
+                        'message' => 'Email & Password do not match our records',
+                    ], 401);
+                }
+                $user = User::where('email', $request->email)->first();
+            } elseif ($request->has('phone')) {
+                if (!Auth::attempt($request->only('phone', 'password'))) {
+                    return response()->json([
+                        'status' => 401,
+                        'message' => 'Phone & Password do not match our records',
+                    ], 401);
+                }
+                $user = User::where('phone', $request->phone)->first();
+            } else {
                 return response()->json([
                     'status' => 401,
-                    'message' => 'Phone & Password Dos Not Match Our Record',
-                    'errors' => $errors
+                    'message' => 'Either email or phone is required'
                 ], 401);
             }
-            $user = User::where('phone', $request->phone)->first();
+
             return response()->json([
                 'status' => 200,
-                'message' => ' Successfully Login ',
+                'message' => 'Successfully logged in',
                 'data' => $user,
-                'token' => $user->createToken("API TOKEn")->plainTextToken,
+                'token' => $user->createToken("API TOKEN")->plainTextToken,
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([

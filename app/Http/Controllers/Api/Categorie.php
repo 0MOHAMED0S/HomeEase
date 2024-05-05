@@ -30,13 +30,13 @@ class Categorie extends Controller
             $path = $image->storeAs('Images', $imageName, 'public');
 
             $categorie = new ModelsCategorie;
-            $categorie->name = $request->input('name');
-            $categorie->path = $path; // Store the image path
+            $categorie->name = $request->name;
+            $categorie->path = $path;
             $categorie->save();
 
             return response()->json([
                 'status' => 200,
-                'message' => 'Category successfully stored',
+                'message' => 'Request successfully sent to the admin',
                 'image_path' => $categorie
             ], 200);
         } catch (\Throwable $th) {
@@ -82,10 +82,10 @@ class Categorie extends Controller
 
             $image = $request->file('path');
             $imageName = $image->getClientOriginalName();
-            $path = $image->storeAs('Images', $imageName, 'public');
+            $path = $image->storeAs('CategoryImages', $imageName, 'public');
 
-            $categorie->name = $request->input('name');
-            $categorie->path = $path; // Update the image path
+            $categorie->name = $request->name;
+            $categorie->path = $path;
             $categorie->save();
 
             return response()->json([
@@ -116,6 +116,23 @@ class Categorie extends Controller
                 'status' => 404,
                 'message' => 'Category not found',
             ], 404);
+        }
+    }
+
+    public function AllCategories(){
+        try {
+            $categories = ModelsCategorie::all();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'All categories retrieved successfully',
+                'categories' => $categories
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
