@@ -23,9 +23,8 @@ Route::group([
     Route::get('/auth/google/callback', [GoogleAuth::class, 'callback'])->name('GoogleCallback');
 
     //company///
-    Route::post('/company/store', [CompanyController::class, 'store']);
 
-
+    Route::get('/company/{id}', [CompanyController::class, 'Company']);
     Route::get('/company/AllCompanies', [CompanyController::class, 'AllCompanies']);
     Route::get('/categorie/AllCategories', [categorie::class, 'AllCategories']);
 
@@ -47,6 +46,18 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         ///order//
         Route::post('/ContractOrder/store', [ContractOrders::class, 'store']);
         Route::post('/HourlyOrder/store', [HourlyOrders::class, 'store']);
+
+        //get all user orders
+        Route::get('/HourlyOrder', [HourlyOrders::class, 'HourlyOrder']);
+        Route::get('/ContractOrder', [ContractOrders::class, 'ContractOrder']);
+        Route::get('/AllOrders', [ContractOrders::class, 'AllOrders']);
+
+        //get  user order details
+        Route::get('/HourlyOrderDetails/{id}', [HourlyOrders::class, 'HourlyOrderDetails']);
+        Route::get('/ContractOrderDetails/{id}', [ContractOrders::class, 'ContractOrderDetails']);
+
+        //company
+        Route::post('/company/store', [CompanyController::class, 'store']);
 
         Route::post('/update-password', [UserAuth::class, 'updatePassword']);
         Route::post('/logout', [UserAuth::class, 'logout']);

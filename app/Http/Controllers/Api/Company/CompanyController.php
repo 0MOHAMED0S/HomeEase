@@ -40,6 +40,7 @@ class CompanyController extends Controller
             $company->price = $request->price;
             $company->nationality = $request->nationality;
             $company->categorie_id = $request->categorie_id;
+            $company->user_id=auth()->user()->id;
             $company->status = 'pending';
             $company->path = $path;
             $company->save();
@@ -53,6 +54,31 @@ class CompanyController extends Controller
             return response()->json([
                 'status' => 500,
                 'message' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function Company($id){
+        try {
+            $company = company::find($id);
+            if($company){
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'The company retrieved successfully',
+                    'company' => $company
+                ], 200);
+            }
+            else{
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'The company Not Found',
+                    'company' => null
+                ], 200);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => $e->getMessage()
             ], 500);
         }
     }

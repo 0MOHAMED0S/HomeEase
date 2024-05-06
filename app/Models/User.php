@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -51,5 +52,19 @@ class User extends Authenticatable
     public function image(): HasOne
     {
         return $this->hasOne(Image::class);
+    }
+    public function Horders(): HasMany
+    {
+        return $this->hasMany(HourlyOrder::class);
+    }
+
+    public function company(): HasMany
+    {
+        return $this->hasMany(Company::class);
+    }
+
+    public function Corders(): HasMany
+    {
+        return $this->hasMany(ContractOrder::class);
     }
 }

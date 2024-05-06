@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Order;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContractOrder;
+use App\Models\HourlyOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +58,90 @@ class ContractOrders extends Controller
             return response()->json([
                 'status' => 500,
                 'message' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function ContractOrderDetails($id){
+        try {
+            $auth=auth()->user()->id;
+            $ContractOrder = ContractOrder::where('user_id',$auth)->find($id);
+            if($ContractOrder){
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'The Contract Order retrieved successfully',
+                    'contract_order' => $ContractOrder
+                ], 200);
+            }
+            else{
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'This User Dont Have Contract Order',
+                    'contract_order' => null
+                ], 200);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function ContractOrder(){
+        try {
+            $auth=auth()->user()->id;
+            $ContractOrder = ContractOrder::where('user_id',$auth)->get();
+            $count=count($ContractOrder);
+            if( $count>0){
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'The Contract Order retrieved successfully',
+                    'count'=>$count,
+                    'contract_order' => $ContractOrder
+                ], 200);
+            }
+            else{
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'This User Dont Have Contract Order',
+                    'contract_order' => null
+                ], 200);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
+
+    public function AllOrders(){
+        try {
+            $auth = auth()->user()->id;
+
+            // Get Contract Orders
+            $contractOrders = ContractOrder::where('user_id', $auth)->get();
+
+            // Get Hourly Orders
+            $hourlyOrders = HourlyOrder::where('user_id', $auth)->get();
+
+            $allOrders = [
+                'contract_orders' => $contractOrders,
+                'hourly_orders' => $hourlyOrders
+            ];
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'All orders retrieved successfully',
+                'all_orders' => $allOrders
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => $e->getMessage()
             ], 500);
         }
     }

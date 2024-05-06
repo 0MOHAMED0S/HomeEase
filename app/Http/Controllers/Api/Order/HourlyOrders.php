@@ -61,4 +61,58 @@ class HourlyOrders extends Controller
             ], 500);
         }
     }
+
+    public function HourlyOrder(){
+        try {
+            $auth=auth()->user()->id;
+            $HourlyOrder = HourlyOrder::where('user_id',$auth)->get();
+            $count=count($HourlyOrder);
+            if($count >  0){
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'The Hourly Order retrieved successfully',
+                    'count'=>$count,
+                    'hourly_order' => $HourlyOrder
+                ], 200);
+            }
+            else{
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'This User Dont Have Hourly Order',
+                    'hourly_order' => null
+                ], 200);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function HourlyOrderDetails($id){
+        try {
+            $auth=auth()->user()->id;
+            $HourlyOrder = HourlyOrder::where('user_id',$auth)->find($id);
+            if($HourlyOrder){
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'The Hourly Order retrieved successfully',
+                    'hourly_order' => $HourlyOrder
+                ], 200);
+            }
+            else{
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'This User Dont Have Hourly Order',
+                    'hourly_order' => null
+                ], 200);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

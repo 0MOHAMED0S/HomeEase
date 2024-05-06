@@ -39,7 +39,7 @@ class UserAuth extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message' => 'Company successfully registered',
+                'message' => 'User successfully registered',
                 'data' => $user,
                 'token' => $user->createToken("API TOKEn")->plainTextToken,
             ], 200);
@@ -55,7 +55,7 @@ class UserAuth extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'email' => 'nullable|email|max:100',
-                'phone' => 'nullable|string|max:12',
+                'phone' => 'nullable|string|max:13',
                 'password' => 'required|string|min:6',
             ]);
             if ($validator->fails()) {
@@ -90,6 +90,14 @@ class UserAuth extends Controller
                 ], 401);
             }
 
+            // Check if the user has role 'user'
+            if ($user->role !== 'user') {
+                return response()->json([
+                    'status' => 401,
+                    'message' => 'Unauthorized. Only For users .',
+                ], 401);
+            }
+
             return response()->json([
                 'status' => 200,
                 'message' => 'Successfully logged in',
@@ -103,6 +111,7 @@ class UserAuth extends Controller
             ], 401);
         }
     }
+
 
     public function updatePassword(Request $request)
     {

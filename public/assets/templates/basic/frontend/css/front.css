@@ -1,0 +1,108 @@
+.card-conversation{
+    position: fixed;
+    bottom: 55px;
+    right: 10px;
+    z-index: 1000;
+    box-shadow: -3px -2px 8px 0 rgba(22, 22, 26, 0.18);
+    min-width: 12rem;
+
+}
+
+
+.card-conversation .card-body ul li{ 
+    padding: 5px 0;
+    border-top: 1px solid #d1cdcd;
+}
+.card-conversation .card-body ul li:first-child{
+    border-top: none;
+}
+.text-decoration{
+    text-decoration: underline;
+}
+
+
+
+
+
+.all-notifications{
+    position: fixed;
+    bottom: 55px;
+    right: 10px;
+    z-index: 1000;
+    box-shadow: -3px -2px 8px 0 rgba(22, 22, 26, 0.18);
+    min-width: 25rem;
+    
+    min-height: 50vh;
+    height: 85vh; 
+    max-height: 85vh; 
+}
+ 
+
+.all-notifications .card-header {
+    background: #0d6efd;
+    color: #fff;
+}
+.all-notifications .card-body {
+  overflow-y: scroll;
+}
+
+.all-notifications .card-body ul li{ 
+    padding: 10px 0;
+    border-top: 1px solid #d1cdcd;
+}
+
+.all-notifications .card-body ul li:first-child{
+    border-top: none;
+}
+
+.text-decoration{
+    text-decoration: underline;
+}
+
+.ml-5{
+    margin: 0 0.5em 10px;
+}
+
+.float-right{
+    float: right;
+}
+.all-notifications ul.notifications-list li{
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+
+.all-notifications ul.notifications-list li button{
+    background: none;
+    color: #000;
+    position: relative;
+}
+.all-notifications ul.notifications-list li button span{
+    font-size: 12px;
+}
+
+.all-notifications .btn-check:active+.btn-primary:focus, .all-notifications .btn-check:checked+.btn-primary:focus, .all-notifications .btn-primary.active:focus, .all-notifications .btn-primary:active:focus, .all-notifications .show>.btn-primary.dropdown-toggle:focus{
+   box-shadow: none;
+}
+
+.all-notifications ul.notifications-list li button.primary-color{
+    color: #0d6efd;
+}
+.all-notifications .notify-count{
+    background: #eb3b3b;
+    color: #fff;
+    padding: 0px 4px;
+    border-radius: 50%;
+    top: 0px;
+    position: absolute;
+}
+.full-width{
+    width: 100%;
+}
+
+.all-notifications  .navbar-notifi .navbar-notifi__right h5 span{
+    width: 7px;
+    height: 7px;
+    background-color: #FFAB00;
+    border-radius: 50%;
+}

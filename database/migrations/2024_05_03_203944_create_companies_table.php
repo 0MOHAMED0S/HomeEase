@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('price');
             $table->text('path');
             $table->foreignId('categorie_id')->references('id')->on('categories')->cascadeOnDelete();
+            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('nationality');
             $table->string('status')->default('pending');
             $table->timestamps();
