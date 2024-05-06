@@ -67,7 +67,7 @@ class UserAuth extends Controller
                 ], 401);
             }
 
-            if ($request->has('email')) {
+            if ($request->filled('email')) {
                 if (!Auth::attempt($request->only('email', 'password'))) {
                     return response()->json([
                         'status' => 401,
@@ -75,7 +75,7 @@ class UserAuth extends Controller
                     ], 401);
                 }
                 $user = User::where('email', $request->email)->first();
-            } elseif ($request->has('phone')) {
+            } elseif($request->filled('phone')){
                 if (!Auth::attempt($request->only('phone', 'password'))) {
                     return response()->json([
                         'status' => 401,
