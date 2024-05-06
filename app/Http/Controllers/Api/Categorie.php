@@ -27,7 +27,7 @@ class Categorie extends Controller
 
             $image = $request->file('path');
             $imageName = $image->getClientOriginalName();
-            $path = $image->storeAs('Images', $imageName, 'public');
+            $path = $image->storeAs('CategoryImages', $imageName, 'public');
 
             $categorie = new ModelsCategorie;
             $categorie->name = $request->name;
