@@ -36,7 +36,7 @@ class Categorie extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message' => 'Request successfully sent to the admin',
+                'message' => 'Stored successfully ',
                 'image_path' => $categorie
             ], 200);
         } catch (\Throwable $th) {

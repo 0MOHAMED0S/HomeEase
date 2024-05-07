@@ -85,11 +85,11 @@ class CompanyController extends Controller
 
     public function AllCompanies(){
         try {
-            $companies = company::all();
+            $companies = company::where('status','active')->get();
 
             return response()->json([
                 'status' => 200,
-                'message' => 'All companies retrieved successfully',
+                'message' => 'All Active Companies Retrieved Successfully',
                 'companies' => $companies
             ], 200);
         } catch (\Exception $e) {

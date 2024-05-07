@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('company_id')->references('id')->on('companies')->cascadeOnDelete();
             $table->foreignId('categorie_id')->references('id')->on('categories')->cascadeOnDelete();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->text('address');
             $table->date('date');
             $table->time('time');
             $table->string('status')->default('pending');

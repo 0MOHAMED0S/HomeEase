@@ -18,7 +18,8 @@ class ContractOrder extends Model
         'date',
         'time',
         'user_id',
-        'status'
+        'status',
+        'address'
     ];
     public function user(): BelongsTo
     {

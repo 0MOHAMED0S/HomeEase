@@ -18,6 +18,7 @@ class ContractOrders extends Controller
                 'number_of_months' => 'required|integer|min:1',
                 'nationality' => 'required|string|max:255',
                 'city' => 'required|string|max:255',
+                'address' => 'required|string|max:255',
                 'company_id' => 'required|exists:companies,id',
                 'categorie_id' => 'required|exists:categories,id',
                 'date' => 'required|date',
@@ -40,6 +41,7 @@ class ContractOrders extends Controller
             $contractOrder = new ContractOrder;
             $contractOrder->number_of_months = $request->number_of_months;
             $contractOrder->city = $request->city;
+            $contractOrder->address = $request->address;
             $contractOrder->nationality = $request->nationality;
             $contractOrder->company_id = $request->company_id;
             $contractOrder->categorie_id = $request->categorie_id;
@@ -115,9 +117,6 @@ class ContractOrders extends Controller
             ], 500);
         }
     }
-
-
-
     public function AllOrders(){
         try {
             $auth = auth()->user()->id;

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('number_of_months');
             $table->string('nationality');
             $table->string('city');
+            $table->text('address');
             $table->foreignId('company_id')->references('id')->on('companies')->cascadeOnDelete();
             $table->foreignId('categorie_id')->references('id')->on('categories')->cascadeOnDelete();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();

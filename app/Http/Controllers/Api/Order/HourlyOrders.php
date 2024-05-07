@@ -17,6 +17,7 @@ class HourlyOrders extends Controller
                 'number_of_hours' => 'required|integer|min:1',
                 'nationality' => 'required|string|max:255',
                 'city' => 'required|string|max:255',
+                'address' => 'required|string|max:255',
                 'company_id' => 'required|exists:companies,id',
                 'categorie_id' => 'required|exists:categories,id',
                 'date' => 'required|date',
@@ -40,6 +41,7 @@ class HourlyOrders extends Controller
             $HourlyOrder->Period = $request->Period;
             $HourlyOrder->number_of_hours = $request->number_of_hours;
             $HourlyOrder->city = $request->city;
+            $HourlyOrder->address = $request->address;
             $HourlyOrder->nationality = $request->nationality;
             $HourlyOrder->company_id = $request->company_id;
             $HourlyOrder->categorie_id = $request->categorie_id;

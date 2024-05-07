@@ -20,7 +20,8 @@ class HourlyOrder extends Model
         'time',
         'system',
         'user_id',
-        'status'
+        'status',
+        'address'
     ];
     public function user(): BelongsTo
     {
