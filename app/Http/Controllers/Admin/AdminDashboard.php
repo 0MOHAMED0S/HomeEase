@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\categorie;
 use App\Models\company;
+use App\Models\Contact;
 use App\Models\ContractOrder;
 use App\Models\HourlyOrder;
 use App\Models\Image;
@@ -161,6 +162,10 @@ class AdminDashboard extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Password updated successfully');
+    }
+    public function messages(){
+        $messages=Contact::get();
+        return view('AdminDashboard.messages.messages',compact('messages'));
     }
 
 

@@ -57,7 +57,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(HourlyOrder::class);
     }
-
+    public function message(): HasMany
+    {
+        return $this->hasMany(Contact::class);
+    }
     public function company(): HasMany
     {
         return $this->hasMany(Company::class);

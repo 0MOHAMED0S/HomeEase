@@ -15,9 +15,8 @@ Route::middleware('guest')->group(function () {
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
 Route::post('/admin/login/store', [AdminAuthController::class, 'store'])->name('admin.login.store');
 
-
-Route::get('/company/login', [AdminAuthController::class, 'login'])->name('company.login');
-Route::post('/company/login/store', [AdminAuthController::class, 'store'])->name('company.login.store');
+Route::get('/company/login', [CompanyAuthController::class, 'login'])->name('company.login');
+Route::post('/company/login/store', [CompanyAuthController::class, 'store'])->name('company.login.store');
 Route::get('/company/register', [CompanyAuthController::class, 'register'])->name('company.register');
 Route::post('/company/register/store', [CompanyAuthController::class, 'rstore'])->name('company.register.store');
 
@@ -29,6 +28,10 @@ Route::middleware(['company'])->group(function () {
     Route::post('/dashboard/mycompanies/store', [CompanyController::class, 'store'])->name('storecompany');
     Route::get('/companies/dashboard/myorders', [CompanyController::class, 'myorders'])->name('company.dashboard.myorders');
     Route::get('/companies/dashboard/myorders/{id}', [CompanyController::class, 'details'])->name('company.dashboard.details');
+    Route::put('/dashboard/myorders/update/{id}/{od}', [CompanyController::class, 'UpdateOrder'])->name('UpdateOrder');
+    Route::get('/company/dashboard/profile', [CompanyController::class, 'profile'])->name('company.dashboard.profile');
+    Route::put('/company/dashboard/profile/update', [CompanyController::class, 'updateprofile'])->name('update.company.profile');
+    Route::post('/company/dashboard/profile/update-password',[CompanyController::class, 'updatePassword'])->name('update.company.password');
 });
 
 Route::middleware(['admin'])->group(function () {
@@ -44,6 +47,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/dashboard/profile/update-password',[AdminDashboard::class, 'updatePassword'])->name('update.admin.password');
     Route::get('/admin/dashboard/companies', [AdminDashboard::class, 'companies'])->name('admin.dashboard.companies');
     Route::put('/dashboard/companies/update/{id}', [AdminDashboard::class, 'updateCompany'])->name('UpdateCompany');
+    Route::get('/admin/dashboard/messages', [AdminDashboard::class, 'messages'])->name('admin.dashboard.messages');
 
 });
 

@@ -62,7 +62,16 @@ a:hover {
     font-family: "Poppins-SemiBold";
     text-align: center;
     margin-bottom: 28px; }
-
+#form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#form button a{
+    color: #fff;
+    text-decoration: none;
+}
 .form-group {
   display: flex; }
   .form-group input {
@@ -132,7 +141,6 @@ button {
   border: none;
   width: 164px;
   height: 51px;
-  margin: auto;
   margin-top: 40px;
   cursor: pointer;
   display: flex;

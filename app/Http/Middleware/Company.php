@@ -19,6 +19,6 @@ class Company
         if ($request->user() && $request->user()->role === 'company') {
             return $next($request);
         }
-        return redirect()->route('admin.login');
+        return redirect()->route('company.login');
     }
 }

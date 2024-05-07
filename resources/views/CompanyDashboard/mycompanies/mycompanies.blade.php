@@ -37,15 +37,9 @@
     </div>
     <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         <header class="topbar" data-navbarbg="skin6">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
                     <a class="navbar-brand" href="index.html">
                         <!-- Logo icon -->
                         <b class="logo-icon">
@@ -62,27 +56,12 @@
 
                         </span>
                     </a>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
                     <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none" href="javascript:void(0)"><i
                             class="ti-menu ti-close"></i></a>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
 
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
                     <ul class="navbar-nav me-auto mt-md-0 ">
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
 
                         <li class="nav-item hidden-sm-down">
                             {{-- <form class="app-search ps-3">
@@ -92,13 +71,7 @@
                         </li>
                     </ul>
 
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
                     <ul class="navbar-nav">
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -128,28 +101,24 @@
                     <ul id="sidebarnav">
                         <!-- User Profile-->
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard') }}" aria-expanded="false"><i
+                                href="{{ route('company.dashboard') }}" aria-expanded="false"><i
                                     class="me-3 far fa-clock fa-fw" aria-hidden="true"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pages-profile.html" aria-expanded="false">
+                                href="{{route('company.dashboard.profile')}}" aria-expanded="false">
                                 <i class="me-3 fa fa-user" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
-                                href="{{ route('admin.dashboard.users.table') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Users</span></a>
-                        </li>
+                            href="{{ route('company.dashboard.myorders') }}" aria-expanded="false"><i
+                                class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
+                    </li>
 
-                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
-                                        href="{{ route('company.dashboard.mycompanies') }}" aria-expanded="false"><i
-                                            class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                            class="hide-menu">My Companies</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
+                            href="{{ route('company.dashboard.mycompanies') }}" aria-expanded="false"><i
+                                class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                class="hide-menu">My Companies</span></a></li>
+                                
 
-
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
-                                href="{{ route('admin.dashboard.orders') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                    class="hide-menu">Orders</span></a></li>
                     </ul>
 
                 </nav>
@@ -202,6 +171,8 @@
                                                 <th class="border-top-0">Phone</th>
                                                 <th class="border-top-0">Price</th>
                                                 <th class="border-top-0">Category</th>
+                                                <th class="border-top-0">numbers</th>
+                                                <th class="border-top-0">tybe</th>
                                                 <th class="border-top-0">Info</th>
                                                 <th class="border-top-0">Nationality</th>
                                                 <th class="border-top-0">Status</th>
@@ -221,6 +192,8 @@
                                                     <td>{{ $company->user->phone }}</td>
                                                     <td>{{ $company->price }}</td>
                                                     <td>{{ $company->category->name }}</td>
+                                                    <td>{{ $company->numbers }}</td>
+                                                    <td>{{ $company->tybe }}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary"
                                                             data-bs-toggle="modal"

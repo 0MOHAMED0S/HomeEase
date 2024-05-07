@@ -44,6 +44,9 @@
                     <i class="zmdi zmdi-arrow-right"></i>
                 </button>
                 <br>
+                <br>
+                <a href="{{route('company.login')}}">already have account ?</a>
+
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul style="color: red">

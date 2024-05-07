@@ -1,40 +1,13 @@
 @extends('layouts.dashboard')
-@section('styles')
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<style>
-    a {
-    text-decoration: none !important;
-}
-.topbar .top-navbar .navbar-nav>.nav-item>.nav-link {
-    line-height: normal !important;
-}
-</style>
-        <!-- UIkit CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.19.2/dist/css/uikit.min.css" />
-        <!-- UIkit JS -->
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.19.2/dist/js/uikit.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.19.2/dist/js/uikit-icons.min.js"></script>
-@endsection
 @section('content')
-@if (session('success'))
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        UIkit.notification({
-            message: '{{ session('success') }}',
-            status: 'success',
-            pos: 'top-right'
-        });
-    });
-</script>
-@endif
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
     </div>
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
-        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" data-sidebar-position="absolute"
+        data-header-position="absolute" data-boxed-layout="full">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -82,12 +55,12 @@
                         <!-- Search -->
                         <!-- ============================================================== -->
 
-                        <li class="nav-item hidden-sm-down">
-                            {{-- <form class="app-search ps-3">
+                        {{-- <li class="nav-item hidden-sm-down">
+                            <form class="app-search ps-3">
                                 <input type="text" class="form-control" placeholder="Search for..."> <a
                                     class="srh-btn"><i class="ti-search"></i></a>
-                            </form> --}}
-                        </li>
+                            </form>
+                        </li> --}}
                     </ul>
 
                     <!-- ============================================================== -->
@@ -132,33 +105,33 @@
                     <ul id="sidebarnav">
                         <!-- User Profile-->
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{route('admin.dashboard')}}" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
-                                    aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
+                                href="{{ route('admin.dashboard') }}" aria-expanded="false"><i
+                                    class="me-3 far fa-clock fa-fw" aria-hidden="true"></i><span
+                                    class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{route('admin.dashboard.profile')}}" aria-expanded="false">
-                                <i class="me-3 fa fa-user" aria-hidden="true"></i><span
-                                    class="hide-menu">Profile</span></a>
+                                <i class="me-3 fa fa-user" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
-                                href="{{route('admin.dashboard.users.table')}}" aria-expanded="false"><i class="me-3 fa fa-table"
-                                    aria-hidden="true"></i><span class="hide-menu">Users</span></a></li>
-
+                                href="{{ route('admin.dashboard.users.table') }}" aria-expanded="false"><i
+                                    class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Users</span></a>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
+                                href="{{ route('admin.dashboard.categories') }}" aria-expanded="false"><i
+                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                    class="hide-menu">Categories</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
+                                href="{{ route('admin.dashboard.companies') }}" aria-expanded="false"><i
+                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                    class="hide-menu">Companies</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
+                                href="{{ route('admin.dashboard.orders') }}" aria-expanded="false"><i
+                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                    class="hide-menu">Orders</span></a></li>
                                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
-                                        href="{{route('admin.dashboard.categories')}}" aria-expanded="false"><i class="me-3 fa fa-table"
-                                            aria-hidden="true"></i><span class="hide-menu">Categories</span></a></li>
-                                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
-                                                href="{{route('admin.dashboard.companies')}}" aria-expanded="false"><i class="me-3 fa fa-table"
-                                                    aria-hidden="true"></i><span class="hide-menu">Companies</span></a></li>
-
-                                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
-                                                        href="{{ route('admin.dashboard.orders') }}" aria-expanded="false"><i
-                                                            class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                                            class="hide-menu">Orders</span></a></li>
-
-                                                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
-                                                                href="{{ route('admin.dashboard.messages') }}" aria-expanded="false"><i
-                                                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                                                    class="hide-menu"> Messages</span></a></li>
+                                        href="{{ route('admin.dashboard.messages') }}" aria-expanded="false"><i
+                                            class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                            class="hide-menu"> Messages</span></a></li>
                     </ul>
 
                 </nav>
@@ -179,12 +152,12 @@
             <div class="page-breadcrumb">
                 <div class="row align-items-center">
                     <div class="col-md-6 col-8 align-self-center">
-                        <h3 class="page-title mb-0 p-0">Categories</h3>
+                        <h3 class="page-title mb-0 p-0">Messages</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Messages</li>
                                 </ol>
                             </nav>
                         </div>
@@ -196,7 +169,6 @@
                     </div>
                 </div>
             </div>
-            @include('AdminDashboard.addCategory')
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -213,43 +185,26 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 style="    display: flex;
-                                justify-content: space-between;" class="card-title">Categories Table <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Add">
-                                    <i class="fas fa-plus-circle"></i>
-                                </button></h4>
-                                <h6 class="card-subtitle"></code></h6>
+                                justify-content: space-between;"
+                                    class="card-title">Users Table <center><h2 class="card-subtitle"><code style="font-size: 20px">{{$messages->count()}}</code></h2></center></h4>
                                 <div class="table-responsive">
                                     <table class="table user-table no-wrap">
                                         <thead>
                                             <tr>
                                                 <th class="border-top-0">#</th>
-                                                <th class="border-top-0">Image</th>
                                                 <th class="border-top-0">Name</th>
-                                                <th class="border-top-0">Action</th>
+                                                <th class="border-top-0">Phone</th>
+                                                <th class="border-top-0">message</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($categories as $category )
-                                            @include('AdminDashboard.editcategory')
-                                            @include('AdminDashboard.deletecategory')
-                                            <tr>
-                                                <td>{{$category->id}}</td>
-                                                <td>
-                                                    <span ><img style="background-color:transparent" class="round"
-                                                    src="{{ asset('storage/'.$category->path) }}" alt="user"
-                                                    width="70" height="70"></span>
-                                                </td>
-                                                <td><a href="">{{$category->name}}</a></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                            data-bs-target="#Edit-{{ $category->id }}">
-                                                            <i class="far fa-edit"></i>
-                                                        </button>
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                            data-bs-target="#delete-{{ $category->id }}">
-                                                            <i class="far fa-trash-alt"></i>
-                                                        </button>
-                                                    </td>
-                                            </tr>
+                                            @foreach ($messages as $message)
+                                                <tr>
+                                                    <td>{{ $message->id }}</td>
+                                                    <td>{{ $message->user->name }}</td>
+                                                    <td>{{ $message->user->phone }}</td>
+                                                    <td>{{ $message->message }}</td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -290,21 +245,4 @@
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->
-@endsection
-@section('scripts')
-@if($errors->has('name') || $errors->has('path'))
-<script>
-    window.onload = function() {
-        @if($errors->has('name'))
-            UIkit.notification({message: '{{ $errors->first('name') }}', status: 'danger', pos: 'top-right'});
-        @endif
-
-
-        @if($errors->has('path'))
-            UIkit.notification({message: '{{ $errors->first('path') }}', status: 'danger', pos: 'top-right'});
-        @endif
-    };
-</script>
-@endif
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 @endsection

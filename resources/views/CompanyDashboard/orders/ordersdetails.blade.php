@@ -93,31 +93,22 @@
                     <ul id="sidebarnav">
                         <!-- User Profile-->
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard') }}" aria-expanded="false"><i
+                                href="{{ route('company.dashboard') }}" aria-expanded="false"><i
                                     class="me-3 far fa-clock fa-fw" aria-hidden="true"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pages-profile.html" aria-expanded="false">
+                                href="{{route('company.dashboard.profile')}}" aria-expanded="false">
                                 <i class="me-3 fa fa-user" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
-                                href="{{ route('admin.dashboard.users.table') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Users</span></a>
-                        </li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
+                            href="{{ route('company.dashboard.myorders') }}" aria-expanded="false"><i
+                                class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
+                    </li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route('company.dashboard.mycompanies') }}" aria-expanded="false"><i
+                                class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                class="hide-menu">My Companies</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
-                                href="{{ route('admin.dashboard.categories') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                    class="hide-menu">Categories</span></a></li>
-
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard.companies') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                    class="hide-menu">Companies</span></a></li>
-                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
-                                        href="{{ route('admin.dashboard.orders') }}" aria-expanded="false"><i
-                                            class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                            class="hide-menu">Orders</span></a></li>
 
                     </ul>
 
@@ -147,7 +138,10 @@
                     </div>
                 </div>
             </div>
+            @if ($orders->count() >0 )
             <div class="container-fluid">
+                <center><h3>{{$company->name}}/{{$company->category->name}}</h3></center>
+                @if ($company->tybe == 'Contract')
                 <div class="row">
                     <!-- column -->
                     <div class="col-sm-12">
@@ -155,7 +149,7 @@
                             <div class="card-body">
                                 <h4 style="    display: flex;
                                 justify-content: space-between;"
-                                    class="card-title">Contract Orders Table <center><h2 class="card-subtitle"><code style="font-size: 20px">{{$contractorders->count()}}</code></h2></center></h4>
+                                    class="card-title">Contract Orders Table <center><h2 class="card-subtitle"><code style="font-size: 20px">{{$orders->count()}}</code></h2></center></h4>
                                 <div class="table-responsive">
                                     <table class="table user-table no-wrap">
                                         <thead>
@@ -170,10 +164,12 @@
                                                 <th class="border-top-0">Date</th>
                                                 <th class="border-top-0">Time</th>
                                                 <th class="border-top-0">Status</th>
+                                                <th class="border-top-0">action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($contractorders as $order)
+                                            @foreach ($orders as $order)
+                                            @include('CompanyDashboard.orders.edit')
                                                 <tr>
                                                     <td>{{ $order->id }}</td>
                                                     <td>{{ $order->number_of_months }}</td>
@@ -185,6 +181,13 @@
                                                     <td>{{ $order->date }}</td>
                                                     <td>{{ $order->time }}</td>
                                                     <td>{{ $order->status }}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#Edit-{{ $order->id }}">
+                                                            <i class="far fa-edit"></i>
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -194,6 +197,8 @@
                         </div>
                     </div>
                 </div>
+                @else
+
                 <div class="row">
                     <!-- column -->
                     <div class="col-sm-12">
@@ -201,7 +206,7 @@
                             <div class="card-body">
                                 <h4 style="    display: flex;
                                 justify-content: space-between;"
-                                    class="card-title">Hourly Orders Table <center><h2 class="card-subtitle"><code style="font-size: 20px">{{$hourlyorders->count()}}</code></h2></center></h4>
+                                    class="card-title">Hourly Orders Table <center><h2 class="card-subtitle"><code style="font-size: 20px">{{$orders->count()}}</code></h2></center></h4>
 
                                 <div class="table-responsive">
                                     <table class="table user-table no-wrap">
@@ -221,7 +226,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($hourlyorders as $order)
+                                            @foreach ($orders as $order)
                                                 <tr>
                                                     <td>{{ $order->id }}</td>
                                                     <td>{{ $order->Period }}</td>
@@ -243,12 +248,13 @@
                         </div>
                     </div>
                 </div>
+
+                @endif
             </div>
-            <footer class="footer text-center">
-                © 2021 Monster Admin by <a href="https://www.wrappixel.com/">wrappixel.com</a>
-            </footer>
+            @endif
         </div>
     </div>
+
 @endsection
 @section('scripts')
     @if ($errors->has('name') || $errors->has('path'))

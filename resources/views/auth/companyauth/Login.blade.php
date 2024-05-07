@@ -16,7 +16,7 @@
         @endif
             @csrf
 
-            <h3>Admin Login Form</h3>
+            <h3>Company Login Form</h3>
             <div class="form-group">
                 <input type="email" placeholder="Email" class="form-control" type="email" name="email" value="{{old('email')}}">
                 <i class="zmdi zmdi-email"></i>
@@ -34,6 +34,8 @@
                 <i class="zmdi zmdi-arrow-right"></i>
             </button>
             <br>
+            <br>
+            <a href="{{route('company.register')}}">dont have account ?</a>
             @if($errors->any())
             <div class="alert alert-danger">
                 <ul style="color: red">

@@ -33,7 +33,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputName" class="form-label">Tybe</label>
-                    <select class="form-select" name="type" aria-label="Default select example">
+                    <select class="form-select" name="tybe" aria-label="Default select example">
                         <option value="Hourly">Hourly</option>
                         <option value="Contract">Contract</option>
                     </select>

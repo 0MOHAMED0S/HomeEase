@@ -98,34 +98,24 @@
                     <ul id="sidebarnav">
                         <!-- User Profile-->
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
-                                href="{{ route('admin.dashboard') }}" aria-expanded="false"><i
+                                href="{{ route('company.dashboard') }}" aria-expanded="false"><i
                                     class="me-3 far fa-clock fa-fw" aria-hidden="true"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
-                                href="{{ route('admin.dashboard.profile') }}" aria-expanded="false">
+                                href="{{ route('company.dashboard.profile') }}" aria-expanded="false">
                                 <i class="me-3 fa fa-user" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard.users.table') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Users</span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard.categories') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                    class="hide-menu">Categories</span></a></li>
-                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                        href="{{ route('admin.dashboard.companies') }}" aria-expanded="false"><i
-                                            class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                            class="hide-menu">Companies</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard.orders') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                    class="hide-menu">Orders</span></a></li>
-                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
-                                        href="{{ route('admin.dashboard.messages') }}" aria-expanded="false"><i
-                                            class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                            class="hide-menu"> Messages</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
+                            href="{{ route('company.dashboard.myorders') }}" aria-expanded="false"><i
+                                class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
+                    </li>
+
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route('company.dashboard.mycompanies') }}" aria-expanded="false"><i
+                                class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                class="hide-menu">My Companies</span></a></li>
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -198,7 +188,7 @@
                     <div class="col-lg-8 col-xlg-9 col-md-7">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('update.admin.profile') }}" method="post"
+                                <form action="{{ route('update.company.profile') }}" method="post"
                                     class="form-horizontal form-material mx-2" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
@@ -250,7 +240,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-body">
-                                    <form method="POST" action="{{ route('update.admin.password') }}" class="form-horizontal form-material mx-2">
+                                    <form method="POST" action="{{ route('update.company.password') }}" class="form-horizontal form-material mx-2">
                                         @csrf
                                         <div class="form-group">
                                             <label class="col-md-12 mb-0">Old Password</label>

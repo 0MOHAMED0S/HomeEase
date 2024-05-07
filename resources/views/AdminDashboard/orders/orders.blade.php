@@ -119,6 +119,11 @@
                                             class="me-3 fa fa-table" aria-hidden="true"></i><span
                                             class="hide-menu">Orders</span></a></li>
 
+                                            <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
+                                                href="{{ route('admin.dashboard.messages') }}" aria-expanded="false"><i
+                                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                                    class="hide-menu"> Messages</span></a></li>
+
                     </ul>
 
                 </nav>

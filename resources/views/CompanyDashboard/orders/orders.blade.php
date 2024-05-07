@@ -70,33 +70,25 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <!-- User Profile-->
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
-                                href="{{ route('admin.dashboard') }}" aria-expanded="false"><i
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
+                                href="{{ route('company.dashboard') }}" aria-expanded="false"><i
                                     class="me-3 far fa-clock fa-fw" aria-hidden="true"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
 
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard.profile') }}" aria-expanded="false">
+                                href="{{ route('company.dashboard.profile') }}" aria-expanded="false">
                                 <i class="me-3 fa fa-user" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard.users.table') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Users</span></a>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="{{ route('admin.dashboard.companies') }}" aria-expanded="false"><i
-                                class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Companies</span></a>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
+                            href="{{ route('company.dashboard.myorders') }}" aria-expanded="false"><i
+                                class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                     </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('company.dashboard.mycompanies') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                    class="hide-menu">My Companies</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard.orders') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                    class="hide-menu">Orders</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{{ route('company.dashboard.mycompanies') }}" aria-expanded="false"><i
+                                class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                class="hide-menu">My Companies</span></a></li>
                     </ul>
 
                 </nav>
@@ -108,12 +100,12 @@
             <div class="page-breadcrumb">
                 <div class="row align-items-center">
                     <div class="col-md-6 col-8 align-self-center">
-                        <h3 class="page-title mb-0 p-0">Dashboard</h3>
+                        <h3 class="page-title mb-0 p-0">Orders</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Orders</li>
                                 </ol>
                             </nav>
                         </div>
@@ -129,7 +121,6 @@
             </div>
             <div class="container-fluid">
                 <div class="row">
-                    <center><h1>{{$company->name}}</h1><h5>{{$company->category->name}}</h5></center>
                     <!-- Column -->
                     @foreach ($companies as $company )
                     <div class="col-sm-6">
@@ -154,9 +145,6 @@
                     </div>
                     @endforeach
                 </div>
-                <footer class="footer text-center">
-                    © 2021 Monster Admin by <a href="https://www.wrappixel.com/">wrappixel.com</a>
-                </footer>
             </div>
         </div>
     @endsection

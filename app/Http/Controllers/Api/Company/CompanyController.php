@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Company;
 
 use App\Http\Controllers\Controller;
 use App\Models\company;
+use App\Models\ContractOrder;
+use App\Models\HourlyOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -137,4 +139,6 @@ class CompanyController extends Controller
             ], 500);
         }
     }
+
+
 }

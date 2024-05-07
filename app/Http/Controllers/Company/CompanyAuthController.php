@@ -15,6 +15,41 @@ class CompanyAuthController extends Controller
     public function register(){
         return view('auth.companyauth.Register');
     }
+    public function store(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'email' => 'nullable|email|max:100',
+                'phone' => 'nullable|string|max:12',
+                'password' => 'required|string|min:6',
+            ]);
+            if ($validator->fails()) {
+                $errors = $validator->errors()->toArray();
+                return redirect()->back()->withErrors($errors)->withInput();
+            }
+
+            if ($request->filled('email')) {
+                if (!Auth::attempt($request->only('email', 'password'))) {
+                    return redirect()->back()->withErrors(['email' => 'Email & Password do not match our records']);
+                }
+                $user = User::where('email', $request->email)->first();
+            } elseif ($request->filled('phone')) {
+                if (!Auth::attempt($request->only('phone', 'password'))) {
+                    return redirect()->back()->withErrors(['phone' => 'Phone & Password do not match our records']);
+                }
+                $user = User::where('phone', $request->phone)->first();
+            } else {
+                return redirect()->back()->withErrors(['email' => 'Either email or phone is required']);
+            }
+
+            if ($user->role !== 'company') {
+                return redirect()->back()->withErrors(['role' => 'Unauthorized. Only for admins.']);
+            }
+            return redirect()->route('company.dashboard')->with('message', 'Successfully logged in');
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(['error' => $th->getMessage()]);
+        }
+    }
 
     public function rstore(Request $request)
     {
@@ -39,7 +74,7 @@ class CompanyAuthController extends Controller
             $user->save();
             // Automatically log in the user after registration if you want
             Auth::login($user);
-            return redirect()->route('dashboard')->with('message', 'User successfully registered');
+            return redirect()->route('company.dashboard')->with('message', 'User successfully registered');
         } catch (\Throwable $th) {
             return redirect()->back()->withErrors(['error' => $th->getMessage()]);
         }

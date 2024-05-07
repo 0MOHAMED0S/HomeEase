@@ -71,32 +71,25 @@
                     <ul id="sidebarnav">
                         <!-- User Profile-->
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
-                                href="{{ route('admin.dashboard') }}" aria-expanded="false"><i
+                                href="{{ route('company.dashboard') }}" aria-expanded="false"><i
                                     class="me-3 far fa-clock fa-fw" aria-hidden="true"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
 
 
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard.profile') }}" aria-expanded="false">
+                                href="{{ route('company.dashboard.profile') }}" aria-expanded="false">
                                 <i class="me-3 fa fa-user" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard.users.table') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Users</span></a>
+                                href="{{ route('company.dashboard.myorders') }}" aria-expanded="false"><i
+                                    class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Orders</span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="{{ route('admin.dashboard.companies') }}" aria-expanded="false"><i
-                                class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Companies</span></a>
-                    </li>
+
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{ route('company.dashboard.mycompanies') }}" aria-expanded="false"><i
                                     class="me-3 fa fa-table" aria-hidden="true"></i><span
                                     class="hide-menu">My Companies</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard.orders') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                    class="hide-menu">Orders</span></a></li>
                     </ul>
 
                 </nav>
@@ -137,7 +130,7 @@
                                     <h4 class="card-title">My Companies</h4>
                                     <div class="text-end">
                                         <h2 class="font-light mb-0"><i class="ti-arrow-up text-success"></i>
-                                            5</h2>
+                                            {{$companiesCount}}</h2>
                                         <span class="text-muted">All</span>
                                     </div>
                                     <span class="text-success"></span>
@@ -158,7 +151,7 @@
                                     <h4 class="card-title">Orers</h4>
                                     <div class="text-end">
                                         <h2 class="font-light mb-0"><i class="ti-arrow-up text-info"></i>
-                                            5</h2>
+                                            </h2>
                                         <span class="text-muted">All</span>
                                     </div>
                                     <div class="progress">
@@ -172,71 +165,6 @@
                     </div>
                     <!-- Column -->
                 </div>
-                <div class="row">
-
-                    <!-- Column -->
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-md-flex">
-                                        <h4 class="card-title col-md-10 mb-md-0 mb-3 align-self-center">Company Users</h4>
-                                        <div class="col-md-2 ms-auto">
-                                        </div>
-                                    </div>
-                                    <div class="table-responsive mt-5">
-                                        <table class="table stylish-table no-wrap">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border-top-0" colspan="2">#</th>
-                                                    <th class="border-top-0">Name</th>
-                                                    <th class="border-top-0">Phone</th>
-                                                    <th class="border-top-0">Company Name</th>
-                                                    <th class="border-top-0">Company Category</th>
-                                                </tr>
-                                            </thead>
-                                            {{-- <tbody>
-                                                @foreach ($companies as $company )
-                                                <tr>
-                                                    <td>{{$company->id}}</td>
-                                                    @if (isset($company->user->image->path))
-                                                    <td><img width="50" height="50" src="{{ asset('storage/'.$company->user->image->path) }}" alt="user"
-                                                        class="profile-pic me-2"></td>
-                                                @else
-                                                        <td><span class="round" style="margin-right:10px;">
-                                                                <?php
-                                                                $name = $company->user->name;
-                                                                $firstCharacter = substr($name, 0, 1);
-                                                                echo $firstCharacter;
-                                                                ?>
-                                                            </span></td>
-                                                    @endif
-                                                    <td class="align-middle">
-                                                        <h6>{{$company->user->name}}</h6>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <h6>{{$company->user->phone}}</h6>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <h6>{{$company->name}}</h6>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <h6>{{$company->category->name}}</h6>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-
-                                            </tbody> --}}
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <footer class="footer text-center">
-                    © 2021 Monster Admin by <a href="https://www.wrappixel.com/">wrappixel.com</a>
-                </footer>
             </div>
         </div>
     @endsection

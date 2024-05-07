@@ -22,7 +22,6 @@ Route::group([
     Route::post('/login', [UserAuth::class, 'login']);
     Route::get('/auth/google/redirect', [GoogleAuth::class, 'redirect'])->name('GoogleRedirect');
     Route::get('/auth/google/callback', [GoogleAuth::class, 'callback'])->name('GoogleCallback');
-
     //company///
 
     Route::get('/company/{id}', [CompanyController::class, 'Company']);
