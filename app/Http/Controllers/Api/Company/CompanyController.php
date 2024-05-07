@@ -110,7 +110,7 @@ class CompanyController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message' => 'All Active Companies Retrieved Successfully',
+                'message' => 'All Active Hourly Companies Retrieved Successfully',
                 'companies' => $companies
             ], 200);
         } catch (\Exception $e) {
@@ -127,7 +127,7 @@ class CompanyController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message' => 'All Active Companies Retrieved Successfully',
+                'message' => 'All Active Contract Companies Retrieved Successfully',
                 'companies' => $companies
             ], 200);
         } catch (\Exception $e) {
