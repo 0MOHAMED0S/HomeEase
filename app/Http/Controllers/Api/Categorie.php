@@ -25,8 +25,9 @@ class Categorie extends Controller
                 ], 422);
             }
 
-             // Process profile image
-            $path = $request->file('path')->store('CategoryImages');
+            $image = $request->file('path');
+            $imageName = $image->getClientOriginalName();
+            $path = $image->storeAs('CategoryImages', $imageName, 'public');
 
             $categorie = new ModelsCategorie;
             $categorie->name = $request->name;

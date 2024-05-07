@@ -195,78 +195,81 @@ class UserAuth extends Controller
     }
 
     public function updateProfile(Request $request)
-    {
-        try {
-            $auth = auth()->user()->id;
-            $user = User::find($auth);
-            $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:25',
-                'path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'email' => 'nullable|email|max:100|unique:users',
-                'phone' => 'required|string|max:12|unique:users',
-            ]);
+{
+    try {
+        $auth = auth()->user()->id;
+        $user = User::find($auth);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:25',
+            'path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'email' => 'nullable|email|max:100|unique:users,email,'.$user->id,
+            'phone' => 'required|string|max:12|unique:users,phone,'.$user->id,
+        ]);
 
-            if ($validator->fails()) {
-                $errors = $validator->errors()->toArray();
-                return response()->json([
-                    'status' => 401,
-                    'message' => 'Validation error',
-                    'errors' => $errors
-                ], 401);
-            }
-
-            // Process profile image
-            $path = $request->file('path')->store('public/Images');
-
-            // Process cover image
-            $coverPath = $request->file('cover')->store('public/Covers');
-
-            // Save profile image in images table if not found, otherwise update
-            $userImage = Image::where('user_id', $user->id)->first();
-            if (!$userImage) {
-                $userImage = new Image();
-                $userImage->user_id = $user->id;
-            }
-
-            $userImage->path = $path;
-            $userImage->save();
-
-            // Save cover image in images table if not found, otherwise update
-            $userCover = Image::where('user_id', $user->id)->first();
-            if (!$userCover) {
-                $userCover = new Image();
-                $userCover->user_id = $user->id;
-                $userCover->type = 'cover';
-            }
-
-            $userCover->path = $coverPath;
-            $userCover->save();
-
-            // Check if phone number is updated, if yes, nullify verify field
-            if ($user->phone !== $request->phone) {
-                $user->email_verified_at = null;
-            }
-
-            $user->name = $request->name;
-            $user->phone = $request->phone;
-            $user->email = $request->email;
-            $user->save();
-
+        if ($validator->fails()) {
+            $errors = $validator->errors()->toArray();
             return response()->json([
-                'status' => 200,
-                'message' => 'User Profile successfully updated',
-                'image_path' => $path,
-                'cover_path' => $coverPath,
-                'user' => $user,
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => 404,
-                'message' => 'User not found',
-            ], 404);
+                'status' => 401,
+                'message' => 'Validation error',
+                'errors' => $errors
+            ], 401);
         }
-    }
 
+        // Process profile image
+        $image = $request->file('path');
+        $imageName = $image->getClientOriginalName();
+        $path = $image->storeAs('Images', $imageName, 'public');
+
+        // Save profile image in images table if not found, otherwise update
+        $userImage = Image::where('user_id', $user->id)->first();
+        if (!$userImage) {
+            $userImage = new Image();
+            $userImage->user_id = $user->id;
+        }
+
+        $userImage->path = $path;
+        $userImage->save();
+
+        // Process cover image
+        $cover = $request->file('cover');
+        $coverName = $cover->getClientOriginalName();
+        $coverPath = $cover->storeAs('Covers', $coverName, 'public');
+
+        // Save cover image in images table if not found, otherwise update
+        $userCover = Image::where('user_id', $user->id)->first();
+        if (!$userCover) {
+            $userCover = new Image();
+            $userCover->user_id = $user->id;
+            $userCover->type = 'cover';
+        }
+
+        $userCover->path = $coverPath;
+        $userCover->save();
+
+        // Check if phone number is updated, if yes, nullify verify field
+        if ($user->phone !== $request->phone) {
+            $user->email_verified_at = null;
+        }
+
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->save();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'User Profile successfully updated',
+            'image_path' => $path,
+            'cover_path' => $coverPath,
+            'user' => $user,
+        ], 200);
+    } catch (\Throwable $th) {
+        return response()->json([
+            'status' => 404,
+            'message' => 'error found',
+        ], 404);
+    }
+}
 
 }
