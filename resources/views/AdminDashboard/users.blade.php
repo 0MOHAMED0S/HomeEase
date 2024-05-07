@@ -6,8 +6,8 @@
             <div class="lds-pos"></div>
         </div>
     </div>
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
-        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" data-sidebar-position="absolute"
+        data-header-position="absolute" data-boxed-layout="full">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -22,14 +22,14 @@
                         <b class="logo-icon">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="{{asset('assets/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />
+                            <img src="{{ asset('assets/images/logo-icon.png') }}" alt="homepage" class="dark-logo" />
 
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="{{asset('assets/images/logo-text.png')}}" alt="homepage" class="dark-logo" />
+                            <img src="{{ asset('assets/images/logo-text.png') }}" alt="homepage" class="dark-logo" />
 
                         </span>
                     </a>
@@ -39,8 +39,8 @@
                     <!-- ============================================================== -->
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none" href="javascript:void(0)"><i
+                            class="ti-menu ti-close"></i></a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -71,10 +71,21 @@
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{asset('assets/images/users/1.jpg')}}" alt="user" class="profile-pic me-2">Markarn Doe
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                @if (isset(auth()->user()->image->path))
+                                <img src="{{ asset('storage/'.auth()->user()->image->path) }}" alt="user"
+                                    class="profile-pic me-2">{{ auth()->user()->name }}
+                            @else
+                                    <td><span class="round" style="margin-right:10px;">
+                                            <?php
+                                            $name = auth()->user()->name;
+                                            $firstCharacter = substr($name, 0, 1);
+                                            echo $firstCharacter;
+                                            ?>
+                                        </span>{{ auth()->user()->name }}</td>
+                                @endif
                             </a>
-                            <ul class="dropdown-menu show" aria-labelledby="navbarDropdown"></ul>
                         </li>
                     </ul>
                 </div>
@@ -94,36 +105,29 @@
                     <ul id="sidebarnav">
                         <!-- User Profile-->
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{route('admin.dashboard')}}" aria-expanded="false"><i class="me-3 far fa-clock fa-fw"
-                                    aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a></li>
+                                href="{{ route('admin.dashboard') }}" aria-expanded="false"><i
+                                    class="me-3 far fa-clock fa-fw" aria-hidden="true"></i><span
+                                    class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pages-profile.html" aria-expanded="false">
-                                <i class="me-3 fa fa-user" aria-hidden="true"></i><span
-                                    class="hide-menu">Profile</span></a>
+                                href="{{route('admin.dashboard.profile')}}" aria-expanded="false">
+                                <i class="me-3 fa fa-user" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
-                                href="{{route('admin.dashboard.users.table')}}" aria-expanded="false"><i class="me-3 fa fa-table"
-                                    aria-hidden="true"></i><span class="hide-menu">Users</span></a></li>
-                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
-                                        href="{{route('admin.dashboard.categories')}}" aria-expanded="false"><i class="me-3 fa fa-table"
-                                            aria-hidden="true"></i><span class="hide-menu">Categories</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="icon-fontawesome.html" aria-expanded="false"><i class="me-3 fa fa-font"
-                                    aria-hidden="true"></i><span class="hide-menu">Icon</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="map-google.html" aria-expanded="false"><i class="me-3 fa fa-globe"
-                                    aria-hidden="true"></i><span class="hide-menu">Google Map</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pages-blank.html" aria-expanded="false"><i class="me-3 fa fa-columns"
-                                    aria-hidden="true"></i><span class="hide-menu">Blank</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pages-error-404.html" aria-expanded="false"><i class="me-3 fa fa-info-circle"
-                                    aria-hidden="true"></i><span class="hide-menu">Error 404</span></a></li>
-                        <li class="text-center p-20 upgrade-btn">
-                            <a href="https://www.wrappixel.com/templates/monsteradmin/"
-                                class="btn btn-danger text-white mt-4" target="_blank">Upgrade to
-                                Pro</a>
+                                href="{{ route('admin.dashboard.users.table') }}" aria-expanded="false"><i
+                                    class="me-3 fa fa-table" aria-hidden="true"></i><span class="hide-menu">Users</span></a>
                         </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
+                                href="{{ route('admin.dashboard.categories') }}" aria-expanded="false"><i
+                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                    class="hide-menu">Categories</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
+                                href="{{ route('admin.dashboard.companies') }}" aria-expanded="false"><i
+                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                    class="hide-menu">Companies</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
+                                href="{{ route('admin.dashboard.orders') }}" aria-expanded="false"><i
+                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                    class="hide-menu">Orders</span></a></li>
                     </ul>
 
                 </nav>
@@ -148,7 +152,7 @@
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Users</li>
                                 </ol>
                             </nav>
@@ -176,8 +180,9 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Users Table</h4>
-                                <h6 class="card-subtitle">Add class <code>.table</code></h6>
+                                <h4 style="    display: flex;
+                                justify-content: space-between;"
+                                    class="card-title">Users Table <center><h2 class="card-subtitle"><code style="font-size: 20px">{{$users->count()}}</code></h2></center></h4>
                                 <div class="table-responsive">
                                     <table class="table user-table no-wrap">
                                         <thead>
@@ -191,19 +196,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($users as $user )
-                                            <tr>
-                                                <td>{{$user->id}}</td>
-                                                <td>
-                                                    <span class="round"><img
-                                                    src="{{ asset('assets/images/users/2.jpg') }}" alt="user"
-                                                    width="50"></span>
-                                                </td>
-                                                <td>{{$user->name}}</td>
-                                                <td>{{$user->phone}}</td>
-                                                <td><a href="">{{count($user->Horders)}}</a></td>
-                                                <td><a href="">{{count($user->Corders)}}</a></td>
-                                            </tr>
+                                            @foreach ($users as $user)
+                                                <tr>
+                                                    <td>{{ $user->id }}</td>
+                                                    <td>
+                                                        <span class="round"><img
+                                                                src="{{ asset('assets/images/users/2.jpg') }}"
+                                                                alt="user" width="50"></span>
+                                                    </td>
+                                                    <td>{{ $user->name }}</td>
+                                                    <td>{{ $user->phone }}</td>
+                                                    <td><a href="">{{ count($user->Horders) }}</a></td>
+                                                    <td><a href="">{{ count($user->Corders) }}</a></td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>

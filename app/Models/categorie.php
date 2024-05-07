@@ -18,4 +18,12 @@ class categorie extends Model
     {
         return $this->hasOne(Company::class);
     }
+    public function ConOrder(): HasOne
+    {
+        return $this->hasOne(ContractOrder::class);
+    }
+    public function HouOrder(): HasOne
+    {
+        return $this->hasOne(HourlyOrder::class);
+    }
 }

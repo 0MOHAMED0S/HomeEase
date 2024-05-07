@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -192,4 +193,80 @@ class UserAuth extends Controller
             'data' => $user,
         ]);
     }
+
+    public function updateProfile(Request $request)
+    {
+        try {
+            $auth = auth()->user()->id;
+            $user = User::find($auth);
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:25',
+                'path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'email' => 'nullable|email|max:100|unique:users',
+                'phone' => 'required|string|max:12|unique:users',
+            ]);
+
+            if ($validator->fails()) {
+                $errors = $validator->errors()->toArray();
+                return response()->json([
+                    'status' => 401,
+                    'message' => 'Validation error',
+                    'errors' => $errors
+                ], 401);
+            }
+
+            // Process profile image
+            $path = $request->file('path')->store('public/Images');
+
+            // Process cover image
+            $coverPath = $request->file('cover')->store('public/Covers');
+
+            // Save profile image in images table if not found, otherwise update
+            $userImage = Image::where('user_id', $user->id)->first();
+            if (!$userImage) {
+                $userImage = new Image();
+                $userImage->user_id = $user->id;
+            }
+
+            $userImage->path = $path;
+            $userImage->save();
+
+            // Save cover image in images table if not found, otherwise update
+            $userCover = Image::where('user_id', $user->id)->first();
+            if (!$userCover) {
+                $userCover = new Image();
+                $userCover->user_id = $user->id;
+                $userCover->type = 'cover';
+            }
+
+            $userCover->path = $coverPath;
+            $userCover->save();
+
+            // Check if phone number is updated, if yes, nullify verify field
+            if ($user->phone !== $request->phone) {
+                $user->email_verified_at = null;
+            }
+
+            $user->name = $request->name;
+            $user->phone = $request->phone;
+            $user->email = $request->email;
+            $user->save();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'User Profile successfully updated',
+                'image_path' => $path,
+                'cover_path' => $coverPath,
+                'user' => $user,
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'User not found',
+            ], 404);
+        }
+    }
+
+
 }

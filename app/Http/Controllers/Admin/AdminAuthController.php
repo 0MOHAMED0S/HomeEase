@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\AdminAuth;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-
 class AdminAuthController extends Controller
 {
     public function login(){
@@ -49,4 +48,38 @@ class AdminAuthController extends Controller
         }
     }
 
+    public function rstore(Request $request)
+{
+    try {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|max:100',
+            'phone' => 'nullable|string|max:12',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $userData = [
+            'name' => $request->name,
+            'password' => bcrypt($request->password),
+        ];
+
+        if ($request->filled('email')) {
+            $userData['email'] = $request->email;
+        } elseif ($request->filled('phone')) {
+            $userData['phone'] = $request->phone;
+        } else {
+            return redirect()->back()->withErrors(['email' => 'Either email or phone is required'])->withInput();
+        }
+
+        $user = User::create($userData);
+
+        return redirect()->route('login')->with('message', 'Registration successful. Please login.');
+    } catch (\Throwable $th) {
+        return redirect()->back()->withErrors(['error' => $th->getMessage()]);
+    }
+}
 }

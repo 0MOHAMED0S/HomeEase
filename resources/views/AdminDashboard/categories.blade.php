@@ -101,9 +101,9 @@
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 @if (isset(auth()->user()->image->path))
-                                    <img src="{{ asset('assets/images/users/1.jpg') }}" alt="user"
-                                        class="profile-pic me-2">{{ auth()->user()->name }}
-                                @else
+                                <img src="{{ asset('storage/'.auth()->user()->image->path) }}" alt="user"
+                                    class="profile-pic me-2">{{ auth()->user()->name }}
+                            @else
                                     <td><span class="round" style="margin-right:10px;">
                                             <?php
                                             $name = auth()->user()->name;
@@ -148,24 +148,12 @@
                                             aria-hidden="true"></i><span class="hide-menu">Categories</span></a></li>
                                             <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
                                                 href="{{route('admin.dashboard.companies')}}" aria-expanded="false"><i class="me-3 fa fa-table"
-                                                    aria-hidden="true"></i><span class="hide-menu">companies</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="icon-fontawesome.html" aria-expanded="false"><i class="me-3 fa fa-font"
-                                    aria-hidden="true"></i><span class="hide-menu">Icon</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="map-google.html" aria-expanded="false"><i class="me-3 fa fa-globe"
-                                    aria-hidden="true"></i><span class="hide-menu">Google Map</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pages-blank.html" aria-expanded="false"><i class="me-3 fa fa-columns"
-                                    aria-hidden="true"></i><span class="hide-menu">Blank</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pages-error-404.html" aria-expanded="false"><i class="me-3 fa fa-info-circle"
-                                    aria-hidden="true"></i><span class="hide-menu">Error 404</span></a></li>
-                        <li class="text-center p-20 upgrade-btn">
-                            <a href="https://www.wrappixel.com/templates/monsteradmin/"
-                                class="btn btn-danger text-white mt-4" target="_blank">Upgrade to
-                                Pro</a>
-                        </li>
+                                                    aria-hidden="true"></i><span class="hide-menu">Companies</span></a></li>
+
+                                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
+                                                        href="{{ route('admin.dashboard.orders') }}" aria-expanded="false"><i
+                                                            class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                                            class="hide-menu">Orders</span></a></li>
                     </ul>
 
                 </nav>

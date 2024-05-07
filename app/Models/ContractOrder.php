@@ -24,4 +24,13 @@ class ContractOrder extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(company::class, 'company_id');
+    }
+    public function categorie(): BelongsTo
+    {
+        return $this->belongsTo(categorie::class, 'categorie_id');
+    }
+
 }

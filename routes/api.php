@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Categorie;
 use App\Http\Controllers\Api\Company\CompanyController;
+use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\GoogleAuth;
 use App\Http\Controllers\Api\Order\ContractOrders;
 use App\Http\Controllers\Api\Order\HourlyOrders;
@@ -63,5 +64,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/logout', [UserAuth::class, 'logout']);
 
         Route::get('/profile', [UserAuth::class, 'userProfile']);
+
+        Route::post('/update-profile', [UserAuth::class, 'updateProfile']);
+        Route::post('/contact', [ContactController::class, 'contact']);
+
     });
 });

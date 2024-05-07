@@ -6,7 +6,6 @@
         a {
             text-decoration: none !important;
         }
-
         .topbar .top-navbar .navbar-nav>.nav-item>.nav-link {
             line-height: normal !important;
         }
@@ -69,9 +68,9 @@
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="navbarDropdown"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 @if (isset(auth()->user()->image->path))
-                                    <img src="{{ asset('storage/'.auth()->user()->image->path) }}" alt="user"
-                                        class="profile-pic me-2">{{ auth()->user()->name }}
-                                @else
+                                <img src="{{ asset('storage/'.auth()->user()->image->path) }}" alt="user"
+                                    class="profile-pic me-2">{{ auth()->user()->name }}
+                            @else
                                     <td><span class="round" style="margin-right:10px;">
                                             <?php
                                             $name = auth()->user()->name;
@@ -111,15 +110,14 @@
                                     class="me-3 fa fa-table" aria-hidden="true"></i><span
                                     class="hide-menu">Categories</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{ route('admin.dashboard.companies') }}" aria-expanded="false"><i
                                     class="me-3 fa fa-table" aria-hidden="true"></i><span
                                     class="hide-menu">Companies</span></a></li>
-
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link "
-                                href="{{ route('admin.dashboard.orders') }}" aria-expanded="false"><i
-                                    class="me-3 fa fa-table" aria-hidden="true"></i><span
-                                    class="hide-menu">Orders</span></a></li>
+                                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
+                                        href="{{ route('admin.dashboard.orders') }}" aria-expanded="false"><i
+                                            class="me-3 fa fa-table" aria-hidden="true"></i><span
+                                            class="hide-menu">Orders</span></a></li>
 
                     </ul>
 
@@ -132,12 +130,12 @@
             <div class="page-breadcrumb">
                 <div class="row align-items-center">
                     <div class="col-md-6 col-8 align-self-center">
-                        <h3 class="page-title mb-0 p-0">Companies</h3>
+                        <h3 class="page-title mb-0 p-0">Orders</h3>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Companies</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Orders</li>
                                 </ol>
                             </nav>
                         </div>
@@ -157,58 +155,89 @@
                             <div class="card-body">
                                 <h4 style="    display: flex;
                                 justify-content: space-between;"
-                                    class="card-title">Cpmpanies Table <center>
-                                        <h2 class="card-subtitle"><code
-                                                style="font-size: 20px">{{ $companies->count() }}</code></h2>
-                                    </center>
-                                </h4>
-                                \ <div class="table-responsive">
+                                    class="card-title">Contract Orders Table <center><h2 class="card-subtitle"><code style="font-size: 20px">{{$ContractOrders->count()}}</code></h2></center></h4>
+                                <div class="table-responsive">
                                     <table class="table user-table no-wrap">
                                         <thead>
                                             <tr>
-                                                <th class="border-top-0">#</th>
-                                                <th class="border-top-0">Image</th>
-                                                <th class="border-top-0">Name</th>
-                                                <th class="border-top-0">Phone</th>
+                                                <th class="border-top-0">Code</th>
+                                                <th class="border-top-0">Number Of Months </th>
+                                                <th class="border-top-0">Name Of User</th>
+                                                <th class="border-top-0">Name Of Company</th>
                                                 <th class="border-top-0">Price</th>
                                                 <th class="border-top-0">Category</th>
-                                                <th class="border-top-0">Info</th>
-                                                <th class="border-top-0">Nationality</th>
+                                                <th class="border-top-0">Nationality Of User</th>
+                                                <th class="border-top-0">City</th>
+                                                <th class="border-top-0">Date</th>
+                                                <th class="border-top-0">Time</th>
                                                 <th class="border-top-0">Status</th>
-                                                <th class="border-top-0">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($companies as $company)
-                                                @include('AdminDashboard.company.editcompany')
-                                                @include('AdminDashboard.company.info')
+                                            @foreach ($ContractOrders as $order)
                                                 <tr>
-                                                    <td>{{ $company->id }}</td>
-                                                    <td>
-                                                        <span><img style="background-color:transparent" class="round"
-                                                                src="{{ asset('storage/' . $company->path) }}"
-                                                                alt="user" width="70" height="70"></span>
-                                                    </td>
-                                                    <td>{{ $company->name }}</td>
-                                                    <td>{{ $company->user->phone }}</td>
-                                                    <td>{{ $company->price }}</td>
-                                                    <td>{{ $company->category->name }}</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#info-{{ $company->id }}">
-                                                            <i class="far fa-...">...</i>
-                                                        </button>
-                                                    </td>
-                                                    <td>{{ $company->nationality }}</td>
-                                                    <td>{{ $company->status }}</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#Edit-{{ $company->id }}">
-                                                            <i class="far fa-edit"></i>
-                                                        </button>
-                                                    </td>
+                                                    <td>{{ $order->id }}</td>
+                                                    <td>{{ $order->number_of_months }}</td>
+                                                    <td>{{ $order->user->name }}</td>
+                                                    <td>{{ $order->company->name }}</td>
+                                                    <td>{{ $order->company->price }}</td>
+                                                    <td>{{ $order->categorie->name }}</td>
+                                                    <td>{{ $order->nationality }}</td>
+                                                    <td>{{ $order->city }}</td>
+                                                    <td>{{ $order->date }}</td>
+                                                    <td>{{ $order->time }}</td>
+                                                    <td>{{ $order->status }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 style="    display: flex;
+                                justify-content: space-between;"
+                                    class="card-title">Hourly Orders Table <center><h2 class="card-subtitle"><code style="font-size: 20px">{{$HourlyOrders->count()}}</code></h2></center></h4>
+
+                                <div class="table-responsive">
+                                    <table class="table user-table no-wrap">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-top-0">Code</th>
+                                                <th class="border-top-0">Period</th>
+                                                <th class="border-top-0">Number Of Hours </th>
+                                                <th class="border-top-0">Name Of User</th>
+                                                <th class="border-top-0">Name Of Company</th>
+                                                <th class="border-top-0">Price</th>
+                                                <th class="border-top-0">Category</th>
+                                                <th class="border-top-0">Nationality Of User</th>
+                                                <th class="border-top-0">City</th>
+                                                <th class="border-top-0">Date</th>
+                                                <th class="border-top-0">Time</th>
+                                                <th class="border-top-0">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($HourlyOrders as $order)
+                                                <tr>
+                                                    <td>{{ $order->id }}</td>
+                                                    <td>{{ $order->Period }}</td>
+                                                    <td>{{ $order->number_of_hours }}</td>
+                                                    <td>{{ $order->user->name }}</td>
+                                                    <td>{{ $order->company->name }}</td>
+                                                    <td>{{ $order->company->price }}</td>
+                                                    <td>{{ $order->categorie->name }}</td>
+                                                    <td>{{ $order->nationality }}</td>
+                                                    <td>{{ $order->city }}</td>
+                                                    <td>{{ $order->date }}</td>
+                                                    <td>{{ $order->time }}</td>
+                                                    <td>{{ $order->status }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
