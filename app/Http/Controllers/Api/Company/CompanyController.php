@@ -103,4 +103,38 @@ class CompanyController extends Controller
             ], 500);
         }
     }
+
+    public function HAllCompanies(){
+        try {
+            $companies = company::where('status','active')->where('tybe','Hourly')->get();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'All Active Companies Retrieved Successfully',
+                'companies' => $companies
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function CAllCompanies(){
+        try {
+            $companies = company::where('status','active')->where('tybe','Contract')->get();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'All Active Companies Retrieved Successfully',
+                'companies' => $companies
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

@@ -28,6 +28,8 @@ Route::group([
     Route::get('/company/{id}', [CompanyController::class, 'Company']);
     Route::get('/company/get/AllCompanies/', [CompanyController::class, 'AllCompanies']);
     Route::get('/categorie/AllCategories', [categorie::class, 'AllCategories']);
+    Route::get('/company/get/Hourly/AllCompanies/', [CompanyController::class, 'HAllCompanies']);
+    Route::get('/company/get/Contract/AllCompanies/', [CompanyController::class, 'CAllCompanies']);
 
     //admin////
     Route::post('/categorie/store', [categorie::class, 'store']);
