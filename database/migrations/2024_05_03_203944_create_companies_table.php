@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreignId('categorie_id')->references('id')->on('categories')->cascadeOnDelete();
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('nationality');
+            $table->string('tybe');
+            $table->integer('numbers');
             $table->string('status')->default('pending');
             $table->timestamps();
         });

@@ -18,7 +18,9 @@ class company extends Model
         'nationality',
         'categorie_id',
         'status',
-        'user_id'
+        'user_id',
+        'tybe',
+        'numbers'
     ];
     public function user(): BelongsTo
     {

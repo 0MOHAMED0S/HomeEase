@@ -13,6 +13,8 @@ class CompanyController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
+                'numbers' => 'required|numeric',
+                'tybe' => 'required|string|max:255',
                 'description' => 'required|string',
                 'price' => 'required|numeric',
                 'path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -36,12 +38,14 @@ class CompanyController extends Controller
 
             $company = new company;
             $company->name = $request->name;
+            $company->tybe = $request->tybe;
+            $company->numbers = $request->numbers;
             $company->description = $request->description;
             $company->price = $request->price;
             $company->nationality = $request->nationality;
             $company->categorie_id = $request->categorie_id;
             $company->user_id=auth()->user()->id;
-            $company->status = 'pending';
+            $company->status = 'active';
             $company->path = $path;
             $company->save();
 

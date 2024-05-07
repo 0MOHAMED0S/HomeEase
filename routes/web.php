@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminDashboard;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Company\CompanyAuthController;
+use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,8 +22,13 @@ Route::get('/company/register', [CompanyAuthController::class, 'register'])->nam
 Route::post('/company/register/store', [CompanyAuthController::class, 'rstore'])->name('company.register.store');
 
 });
-Route::middleware(['admin'])->group(function () {
 
+Route::middleware(['company'])->group(function () {
+    Route::get('/company/dashboard', [CompanyController::class, 'index'])->name('company.dashboard');
+    Route::get('/companies/dashboard/mycompanies', [CompanyController::class, 'mycompanies'])->name('company.dashboard.mycompanies');
+    Route::post('/dashboard/mycompanies/store', [CompanyController::class, 'store'])->name('storecompany');
+    Route::get('/companies/dashboard/myorders', [CompanyController::class, 'myorders'])->name('company.dashboard.myorders');
+    Route::get('/companies/dashboard/myorders/{id}', [CompanyController::class, 'details'])->name('company.dashboard.details');
 });
 
 Route::middleware(['admin'])->group(function () {
@@ -36,7 +42,6 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/dashboard/profile', [AdminDashboard::class, 'profile'])->name('admin.dashboard.profile');
     Route::put('/dashboard/profile/update', [AdminDashboard::class, 'updateprofile'])->name('update.admin.profile');
     Route::post('/dashboard/profile/update-password',[AdminDashboard::class, 'updatePassword'])->name('update.admin.password');
-
     Route::get('/admin/dashboard/companies', [AdminDashboard::class, 'companies'])->name('admin.dashboard.companies');
     Route::put('/dashboard/companies/update/{id}', [AdminDashboard::class, 'updateCompany'])->name('UpdateCompany');
 
