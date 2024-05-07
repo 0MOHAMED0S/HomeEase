@@ -26,7 +26,7 @@ Route::group([
     //company///
 
     Route::get('/company/{id}', [CompanyController::class, 'Company']);
-    Route::get('/company/AllCompanies', [CompanyController::class, 'AllCompanies']);
+    Route::get('/company/get/AllCompanies/', [CompanyController::class, 'AllCompanies']);
     Route::get('/categorie/AllCategories', [categorie::class, 'AllCategories']);
 
     //admin////
