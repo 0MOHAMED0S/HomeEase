@@ -40,7 +40,7 @@ class AdminDashboard extends Controller
     public function store(request $request){
         $validatedData = $request->validate([
             'name' => 'required|string|max:25',
-            'path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Adjusted for images
+            'path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
             $image = $request->file('path');
             $imageName = $image->getClientOriginalName();
@@ -55,12 +55,9 @@ class AdminDashboard extends Controller
 
     public function delete($id){
         $categorie = categorie::find($id);
-        // Check if the product exists
         if (!$categorie) {
             return redirect()->back()->with('error', 'category Not Found');
         }
-
-        // Proceed with the deletion
         $categorie->delete();
         return redirect()->back()->with('success', 'category Deleted successfully');
     }
@@ -70,7 +67,7 @@ class AdminDashboard extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:25',
-            'path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Adjusted for images
+            'path' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         if ($request->file('path')) {
             $image = $request->file('path');
@@ -151,13 +148,9 @@ class AdminDashboard extends Controller
             'old_password' => 'required|string',
             'new_password' => 'required|string|min:8|confirmed',
         ]);
-
-        // Check if old password matches
         if (!Hash::check($request->old_password, $user->password)) {
             return redirect()->back()->with(['success' => 'The provided old password does not match your current password.']);
         }
-
-        // Update password
         $user->password = Hash::make($request->new_password);
         $user->save();
 

@@ -91,7 +91,6 @@ class UserAuth extends Controller
                 ], 401);
             }
 
-            // Check if the user has role 'user'
             if ($user->role !== 'user') {
                 return response()->json([
                     'status' => 401,
@@ -123,7 +122,6 @@ class UserAuth extends Controller
 
         $user = auth()->user();
 
-        // Debugging: Check the type of $user
         if (!$user instanceof User) {
             return response()->json([
                 'status' => 'error',
@@ -138,7 +136,6 @@ class UserAuth extends Controller
             ], 422);
         }
 
-        // Update user password
         $user->password = Hash::make($request->new_password);
         $user->save();
 
@@ -167,7 +164,6 @@ class UserAuth extends Controller
                 'message' => 'Logged out successfully.'
             ]);
         } catch (\Exception $e) {
-            // Log the error
             Log::error('Error occurred during logout: ' . $e->getMessage());
 
             return Response::json([
@@ -215,13 +211,9 @@ class UserAuth extends Controller
                 'errors' => $errors
             ], 401);
         }
-
-        // Process profile image
         $image = $request->file('path');
         $imageName = $image->getClientOriginalName();
         $path = $image->storeAs('Images', $imageName, 'public');
-
-        // Save profile image in images table if not found, otherwise update
         $userImage = Image::where('user_id', $user->id)->first();
         if (!$userImage) {
             $userImage = new Image();
@@ -230,13 +222,9 @@ class UserAuth extends Controller
 
         $userImage->path = $path;
         $userImage->save();
-
-        // Process cover image
         $cover = $request->file('cover');
         $coverName = $cover->getClientOriginalName();
         $coverPath = $cover->storeAs('Covers', $coverName, 'public');
-
-        // Save cover image in images table if not found, otherwise update
         $userCover = Image::where('user_id', $user->id)->first();
         if (!$userCover) {
             $userCover = new Image();
@@ -246,8 +234,6 @@ class UserAuth extends Controller
 
         $userCover->path = $coverPath;
         $userCover->save();
-
-        // Check if phone number is updated, if yes, nullify verify field
         if ($user->phone !== $request->phone) {
             $user->email_verified_at = null;
         }

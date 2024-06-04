@@ -41,7 +41,6 @@ class PhoneVerify extends Controller
                 'request_id' => $requestId,
             ], 200);
         } catch (\Exception $e) {
-            // Log the error
             Log::error('Verification error: ' . $e->getMessage());
             return response()->json([
                 'status' => 500,
@@ -83,7 +82,6 @@ class PhoneVerify extends Controller
                 }
             }
 
-            // Log failed verification
             Log::warning('Invalid verification code for request ID: ' . $registerId);
 
             return response()->json([
@@ -91,7 +89,6 @@ class PhoneVerify extends Controller
                 'message' => 'Wrong code or expired.',
             ], 422);
         } catch (VonageRequestException $e) {
-            // Log Vonage API request errors
             Log::error('Vonage API request error: ' . $e->getMessage());
 
             return response()->json([
@@ -99,7 +96,6 @@ class PhoneVerify extends Controller
                 'message' => 'Verification failed. Please try again later.',
             ], 500);
         } catch (VonageServerException $e) {
-            // Log Vonage API server errors
             Log::error('Vonage API server error: ' . $e->getMessage());
 
             return response()->json([
@@ -107,7 +103,6 @@ class PhoneVerify extends Controller
                 'message' => 'Verification failed. Please try again later.',
             ], 500);
         } catch (\Exception $e) {
-            // Log other unexpected errors
             Log::error('Unexpected error: ' . $e->getMessage());
 
             return response()->json([

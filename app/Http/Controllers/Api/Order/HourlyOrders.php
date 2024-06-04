@@ -33,10 +33,7 @@ class HourlyOrders extends Controller
                 ], 422);
             }
 
-            // Get the authenticated user's ID
             $userId = Auth::id();
-
-            // Create a new contract order
             $HourlyOrder = new HourlyOrder;
             $HourlyOrder->Period = $request->Period;
             $HourlyOrder->number_of_hours = $request->number_of_hours;

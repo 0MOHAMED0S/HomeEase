@@ -34,10 +34,8 @@ class ContractOrders extends Controller
                 ], 422);
             }
 
-            // Get the authenticated user's ID
             $userId = Auth::id();
 
-            // Create a new contract order
             $contractOrder = new ContractOrder;
             $contractOrder->number_of_months = $request->number_of_months;
             $contractOrder->city = $request->city;
@@ -121,10 +119,7 @@ class ContractOrders extends Controller
         try {
             $auth = auth()->user()->id;
 
-            // Get Contract Orders
             $contractOrders = ContractOrder::where('user_id', $auth)->get();
-
-            // Get Hourly Orders
             $hourlyOrders = HourlyOrder::where('user_id', $auth)->get();
 
             $allOrders = [

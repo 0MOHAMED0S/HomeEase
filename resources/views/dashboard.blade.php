@@ -17,7 +17,6 @@
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
                             <img src="{{ asset('assets/images/logo-icon.png') }}" alt="homepage" class="dark-logo" />
-
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
@@ -200,7 +199,6 @@
                             </div>
                         </a>
                     </div>
-                    <!-- Column -->
                     <!-- Column -->
                     <div class="col-sm-6">
                         <a href="{{ route('admin.dashboard.orders') }}">
